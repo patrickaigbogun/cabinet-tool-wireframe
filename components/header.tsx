@@ -1,18 +1,34 @@
+// Header.tsx (Client Component)
+'use client'
+import { UserCircleDashed } from "@phosphor-icons/react/dist/ssr";
 
+// type headerProps = {
+//   // You no longer need handleLogin as a prop here
+// };
 
 function Header() {
-	return (
-		<header>
-			<div className=" flex flex-row justify-between" >
-				<div>
-					Cabinet Tool
-				</div>
-				<div>
-					<img className="rounded-full" src="#" alt="profile image" />
-				</div>
-			</div>
-		</header>
-	);
-};
+  // Define handleLogin directly in the client component
+  const handleLogin = () => {
+    const isLoggedIn = false; // You can replace this logic with actual login status
+    if (!isLoggedIn) {
+      window.location.replace("/login");
+    } else {
+      window.location.replace("/closedcabinet");
+    }
+  };
 
-export default Header
+  return (
+    <header>
+      <div className="p-4 flex flex-row justify-between">
+        <div className="font-extrabold">Cabinet Tool</div>
+        <div className="hover:brightness-75">
+          <button onClick={handleLogin}>
+            <UserCircleDashed size={32} weight="duotone" />
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default Header;
