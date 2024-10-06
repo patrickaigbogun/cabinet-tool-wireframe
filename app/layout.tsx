@@ -4,6 +4,7 @@ import '@radix-ui/themes/styles.css';
 import { Theme,  } from '@radix-ui/themes';
 import { ThemeProvider } from 'next-themes';
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 
 
@@ -25,6 +26,7 @@ export default function RootLayout({
 						<Header />
 						{children}
 						{/* <ThemePanel /> */}
+						<Footer />
 					</Theme>
 				</ThemeProvider>
 			</body>
