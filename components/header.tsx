@@ -22,7 +22,8 @@ function Header() {
       <div className="p-4 flex flex-row justify-between">
         <div className="font-extrabold">Cabinet Tool</div>
         <div className="hover:brightness-75">
-          <button onClick={handleLogin}>
+          <button className="flex p-2 gap-2 items-center hover:border-l-2 hover:border-purple-400" onClick={handleLogin}>
+            login
             <UserCircleDashed size={32} weight="duotone" />
           </button>
         </div>
