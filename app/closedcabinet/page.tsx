@@ -13,7 +13,7 @@ interface FileData {
 	dateUploaded: string;
 }
 
-export default function FileTable() {
+export default function ClosedCabinet() {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [sortColumn, setSortColumn] = useState<keyof FileData>('name');
 	const [sortAscending, setSortAscending] = useState(true);
