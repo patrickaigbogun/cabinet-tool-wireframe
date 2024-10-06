@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+
+# Cabinet Tool
+
+Cabinet Tool is a file storage and sharing platform that allows users to upload files, store them in a "cabinet," and easily share links to download the files. The platform offers free storage and straightforward file management, making it a practical solution for personal and professional use.
+
+## Features
+
+- **File Upload**: Upload multiple files via drag-and-drop.
+- **File Management**: Organize files with a sortable table that includes name, type, size, and upload date.
+- **Search & Filter**: Easily search for files by name or type.
+- **Download Links**: Generate downloadable links for each file.
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/patrickaigbogun/cabinet-tool.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Usage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Drag and drop files into the upload area.
+2. Use the search bar to filter files by name or type.
+3. Click the download button to retrieve file links for downloading.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js**: For the frontend and backend logic.
+- **React**: UI components and state management.
+- **Radix UI**: Styled components for the table and layout.
+- **TypeScript**: Type safety throughout the project.
+- **Sanity CMS**: (Optional) Manage files through a connected CMS.
 
-## Learn More
+## Contribution
 
-To learn more about Next.js, take a look at the following resources:
+Feel free to fork the repository and submit pull requests to add new features or improvements.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is open-source under the [MIT License](LICENSE).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
