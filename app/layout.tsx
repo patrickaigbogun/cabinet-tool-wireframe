@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import '@radix-ui/themes/styles.css';
-import { Theme, ThemePanel } from '@radix-ui/themes';
+import { Theme,  } from '@radix-ui/themes';
 import { ThemeProvider } from 'next-themes';
 import Header from "@/components/header";
 
