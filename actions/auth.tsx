@@ -69,7 +69,7 @@ export async function Signup({ username, email, password }: { username: string; 
 		localStorage.setItem("authToken", token); // Store JWT in localStorage
 
 		alert("Signup successful! Taking you to your Cabinet.");
-		window.location.replace('./closedcabinet');
+		window.location.replace('../closedcabinet');
 	}
 }
 
@@ -101,6 +101,7 @@ export async function Login({ email, password }: { email: string; password: stri
 			localStorage.setItem("authToken", token); // Store JWT in localStorage
 
 			alert("Login successful!");
+			window.location.replace('../closedcabinet');
 		} else {
 			console.log("Incorrect password");
 			alert("Incorrect password. Please try again.");
