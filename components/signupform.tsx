@@ -47,7 +47,7 @@ export default function SignupForm() {
 								<input className="ring-2 ring-slate-600 rounded-lg text-black p-3" type="password" name="password" id="password" required />
 							</div>
 						</div>
-						<button type="submit" className="mt-4 bg-slate-700 text-white rounded-xl p-2">
+						<button type="submit" className="mt-4 bg-slate-700 text-white rounded-lg p-2">
 							Sign Up
 						</button>
 					</div>
