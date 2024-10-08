@@ -5,9 +5,12 @@ import {  } from '@/actions/auth';  // Import the token validation function
 
 function CabinetHeader() {
 
-function handleLogout(){
-	
-}	
+	function handleLogout() {
+		localStorage.removeItem('authToken'); // Remove the JWT token
+		alert("You've been logged out.");
+		window.location.replace('../'); // Redirect to login or home page
+	}
+		
 
 	return (
 		<header>
