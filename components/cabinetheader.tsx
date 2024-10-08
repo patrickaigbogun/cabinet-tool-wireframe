@@ -7,7 +7,7 @@ function CabinetHeader() {
 
 	function handleLogout() {
 		localStorage.removeItem('authToken'); // Remove the JWT token
-		alert("You've been logged out.");
+		alert("Your cabinet stays safe.. till your return");
 		window.location.replace('../'); // Redirect to login or home page
 	}
 		
