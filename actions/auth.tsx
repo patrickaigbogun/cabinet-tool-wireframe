@@ -95,7 +95,7 @@ export async function Signup({ username, email, password }: { username: string; 
 }
 
 // Login function to check if the user exists in localStorage and validate JWT
-export async function Login({ email, password }: { email: string; password: string }) {
+export async function Login({ email, password }: { email: string; password: string }): Promise<boolean> {
 	const user = JSON.parse(localStorage.getItem(email) || 'null');
 
 	if (user) {
@@ -123,12 +123,15 @@ export async function Login({ email, password }: { email: string; password: stri
 
 			alert("Login successful!");
 			window.location.replace('../closedcabinet');
+			return true; // Indicate successful login
 		} else {
 			console.log("Incorrect password");
 			alert("Incorrect password. Please try again.");
+			return false; // Indicate login failed
 		}
 	} else {
 		console.log("User not found");
 		alert("User not found. Please sign up.");
+		return false; // Indicate login failed
 	}
 }

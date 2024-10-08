@@ -1,6 +1,6 @@
 import SignupForm from "@/components/signupform";
 
-export default function AuthPage() {
+export default function SignupPage() {
   return (
     <section>
         <SignupForm />
