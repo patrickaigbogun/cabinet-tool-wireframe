@@ -1,4 +1,4 @@
-// Header.tsx (Client Component)
+// @/components/header.tsx (Client Component)
 'use client'
 import { UserCircleDashed } from "@phosphor-icons/react/dist/ssr";
 
