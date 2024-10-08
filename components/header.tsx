@@ -1,19 +1,26 @@
 // @/components/header.tsx (Client Component)
 'use client'
+import { useEffect, useState } from 'react';
 import { UserCircleDashed } from "@phosphor-icons/react/dist/ssr";
-
-// type headerProps = {
-//   // You no longer need handleLogin as a prop here
-// };
+import { validateToken } from '@/actions/auth';  // Import the token validation function
 
 function Header() {
-	// Define handleLogin directly in the client component
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	// Check for token on site load
+	useEffect(() => {
+		const token = localStorage.getItem("authToken");
+		if (token && validateToken(token)) {
+			setIsLoggedIn(true);
+		}
+	}, []);
+
+	// Handle login button click
 	const handleLogin = () => {
-		const isLoggedIn = false; // You can replace this logic with actual login status
-		if (!isLoggedIn) {
-			window.location.replace("/auth/signup");
+		if (isLoggedIn) {
+			window.location.replace("/closedcabinet");  // Redirect to cabinet if logged in
 		} else {
-			window.location.replace("/closedcabinet");
+			window.location.replace("/auth/signup");  // Redirect to signup/login if not logged in
 		}
 	};
 
@@ -23,7 +30,7 @@ function Header() {
 				<div className="font-extrabold">Cabinet Tool</div>
 				<div className="hover:brightness-75">
 					<button className="flex p-2 gap-2 items-center hover:border-l-2 hover:border-purple-400" onClick={handleLogin}>
-						login
+						{isLoggedIn ? 'Go to Cabinet' : 'Login'}
 						<UserCircleDashed size={32} weight="duotone" />
 					</button>
 				</div>

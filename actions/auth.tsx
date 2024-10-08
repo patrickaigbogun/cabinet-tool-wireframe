@@ -1,3 +1,24 @@
+// @actions/auth.tsx
+
+
+
+
+
+
+// Helper function to validate JWT (for demonstration purposes, adjust for real validation)
+export function validateToken(token: string) {
+	try {
+		const decoded = JSON.parse(atob(token));
+		// Perform any additional validation on decoded token if needed
+		return decoded?.email ? true : false;
+	} catch (error) {
+		console.log("Invalid token ", error );
+		return false;
+	}
+}
+
+
+
 // Helper function to encode the message (password)
 function getMessageEncoding(message: string) {
 	const enc = new TextEncoder();
