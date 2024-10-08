@@ -157,8 +157,8 @@ export default function ClosedCabinet() {
 	}, [fetchFilesFromDB]);
 
 	return (
-		<Box className="p-4">
-			<div className="container mx-auto mt-10">
+		<Box className="p-4 space-y-7">
+			<div className="container mx-auto">
 				<DragAndDropTarget onDropFiles={handleDropFiles} />
 			</div>
 
