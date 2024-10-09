@@ -63,7 +63,7 @@ export async function Signup({ username, email, password }: { username: string; 
 
 	if (existingUser) {
 		console.log("User already exists.");
-		alert("Welcome Back. Logging you in.");
+		alert("Cabinet recognizes you, Access Granted");
 		window.location.replace('../closedcabinet');
 	} else {
 		// Encrypt the user's password

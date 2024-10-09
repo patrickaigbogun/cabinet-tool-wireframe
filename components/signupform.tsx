@@ -36,15 +36,15 @@ export default function SignupForm() {
 						<div className="space-y-6">
 							<div className="flex flex-col gap-y-2">
 								<label className="text-lg" htmlFor="username">USERNAME</label>
-								<input className="ring-2 ring-slate-600 rounded-lg text-black p-3" type="text" name="username" id="username" required />
+								<input className="ring-2 ring-slate-600 rounded-lg text-white p-3" type="text" name="username" id="username" required />
 							</div>
 							<div className="flex flex-col gap-y-2">
 								<label className="text-lg" htmlFor="email">EMAIL</label>
-								<input className="ring-2 ring-slate-600 rounded-lg text-black p-3" type="email" name="email" id="email" required />
+								<input className="ring-2 ring-slate-600 rounded-lg text-white p-3" type="email" name="email" id="email" required />
 							</div>
 							<div className="flex flex-col gap-y-2">
 								<label className="text-lg" htmlFor="password">PASSWORD</label>
-								<input className="ring-2 ring-slate-600 rounded-lg text-black p-3" type="password" name="password" id="password" required />
+								<input className="ring-2 ring-slate-600 rounded-lg text-white p-3" type="password" name="password" id="password" required />
 							</div>
 						</div>
 						<button type="submit" className="mt-4 bg-slate-700 text-white rounded-lg p-2">
