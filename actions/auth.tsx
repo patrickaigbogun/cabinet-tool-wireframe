@@ -135,3 +135,10 @@ export async function Login({ email, password }: { email: string; password: stri
 		return false; // Indicate login failed
 	}
 }
+
+
+export function Logout() {
+	localStorage.removeItem('authToken'); // Remove the JWT token
+	alert("Your cabinet stays safe.. till your return");
+	window.location.replace('../'); // Redirect to login or home page
+}
