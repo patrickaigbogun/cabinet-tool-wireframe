@@ -110,12 +110,30 @@ export default function ClosedCabinet() {
 	};
 
 	const handleDelete = (file: FileData) => {
-		if (localStorage.getItem(file.id.toString())) {
-			// Remove the item from local storage
-			localStorage.removeItem(file.id.toString());
-			console.log('Item removed from local storage.');
-		}
-	}
+		const request = initDB();
+	
+		request.onsuccess = (event: Event) => {
+			const db = (event.target as IDBOpenDBRequest).result;
+			const transaction = db.transaction(['files'], 'readwrite');
+			const store = transaction.objectStore('files');
+			const deleteRequest = store.delete(file.id);
+	
+			deleteRequest.onsuccess = () => {
+				console.log(`File with id ${file.id} deleted from IndexedDB`);
+				// Remove file from the state
+				setClosedCabinet((prevFiles) => prevFiles.filter((f) => f.id !== file.id));
+			};
+	
+			deleteRequest.onerror = (event: Event) => {
+				console.error(`Failed to delete file with id ${file.id}:`, (event.target as IDBRequest).error);
+			};
+		};
+	
+		request.onerror = (event: Event) => {
+			console.error('Failed to open database for deletion:', (event.target as IDBOpenDBRequest).error);
+		};
+	};
+	
 
 	// Handle search
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -177,40 +195,46 @@ export default function ClosedCabinet() {
 					onChange={handleSearch}
 					className=" focus:border-black focus:ring-black rounded-full p-2"
 				/>
-				<FileMagnifyingGlass size={28} className="mr-6" />
+				<FileMagnifyingGlass size={28} weight='bold' className="mr-6" />
 			</div>
 
 			<Table.Root>
 				<Table.Header>
 					<Table.Row>
 						<Table.ColumnHeaderCell >
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
 								File Name
-								{sortAscending? <SortAscending size={24} weight="fill" /> : <SortDescending size={24} weight="fill" />}
+								{sortAscending? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell >
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg' >
-								File Type
+						<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
+						File Type
+								{sortAscending? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
+
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
-								File Size
+						<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
+						File Size
+								{sortAscending? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
+
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell >
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
-								Date Uploaded
+						<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
+						Date Uploaded
+								{sortAscending? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
+
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell >
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+							<button className='border-[1.5px] p-2 rounded-lg'>
 								Download
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell >
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+							<button className='border-[1.5px] p-2 rounded-lg'>
 								Delete
 							</button>
 						</Table.ColumnHeaderCell>
@@ -229,7 +253,7 @@ export default function ClosedCabinet() {
 									className="border-[#48295D]  border rounded-full p-3"
 									onClick={() => handleDownload(file)}
 								>
-									<FileArrowDown size={24} weight="fill" />
+									<FileArrowDown size={24} weight="bold" />
 								</button>
 							</Table.Cell>
 							<Table.Cell>
@@ -237,7 +261,7 @@ export default function ClosedCabinet() {
 									className=" border-[#54178d]  border rounded-full p-3"
 									onClick={() => handleDelete(file)}
 								>
-									<FileX size={24} weight="fill" />
+									<FileX size={24} weight="bold" />
 								</button>
 							</Table.Cell>
 						</Table.Row>
