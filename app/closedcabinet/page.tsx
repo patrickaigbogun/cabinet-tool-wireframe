@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { Box, Table } from '@radix-ui/themes';
-import { PinBottomIcon } from '@radix-ui/react-icons';
 import DragAndDropTarget from '@/components/draganddroptarget';
+import { FileArrowDown, FileMagnifyingGlass, FileX, SortAscending, SortDescending } from '@phosphor-icons/react/dist/ssr';
 
 interface FileData {
 	id: number;
@@ -109,6 +109,14 @@ export default function ClosedCabinet() {
 		a.click();
 	};
 
+	const handleDelete = (file: FileData) => {
+		if (localStorage.getItem(file.id.toString())) {
+			// Remove the item from local storage
+			localStorage.removeItem(file.id.toString());
+			console.log('Item removed from local storage.');
+		}
+	}
+
 	// Handle search
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(e.target.value);
@@ -157,32 +165,54 @@ export default function ClosedCabinet() {
 	}, [fetchFilesFromDB]);
 
 	return (
-		<Box className="p-4 space-y-7">
+		<Box className="p-4 space-y-7 font-bold">
 			<div className="container mx-auto">
 				<DragAndDropTarget onDropFiles={handleDropFiles} />
 			</div>
-
-			<input
-				placeholder="Search files..."
-				value={searchTerm}
-				onChange={handleSearch}
-				className="mb-4"
-			/>
+			<div className='flex flex-row items-center border-[3px] border-[#48295D] p-0 w-fit rounded-full' >
+				<input
+					placeholder="Search files..."
+					type='search'
+					value={searchTerm}
+					onChange={handleSearch}
+					className=" focus:border-black focus:ring-black rounded-full p-2"
+				/>
+				<FileMagnifyingGlass size={28} className="mr-6" />
+			</div>
 
 			<Table.Root>
 				<Table.Header>
 					<Table.Row>
-						<Table.ColumnHeaderCell onClick={() => handleSort('name')}>
-							File Name
+						<Table.ColumnHeaderCell >
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+								File Name
+								{sortAscending? <SortAscending size={24} weight="fill" /> : <SortDescending size={24} weight="fill" />}
+							</button>
 						</Table.ColumnHeaderCell>
-						<Table.ColumnHeaderCell onClick={() => handleSort('type')}>
-							File Type
+						<Table.ColumnHeaderCell >
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg' >
+								File Type
+							</button>
 						</Table.ColumnHeaderCell>
-						<Table.ColumnHeaderCell onClick={() => handleSort('size')}>
-							File Size
+						<Table.ColumnHeaderCell>
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+								File Size
+							</button>
 						</Table.ColumnHeaderCell>
-						<Table.ColumnHeaderCell onClick={() => handleSort('dateUploaded')}>
-							Date Uploaded
+						<Table.ColumnHeaderCell >
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+								Date Uploaded
+							</button>
+						</Table.ColumnHeaderCell>
+						<Table.ColumnHeaderCell >
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+								Download
+							</button>
+						</Table.ColumnHeaderCell>
+						<Table.ColumnHeaderCell >
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg'>
+								Delete
+							</button>
 						</Table.ColumnHeaderCell>
 					</Table.Row>
 				</Table.Header>
@@ -190,16 +220,24 @@ export default function ClosedCabinet() {
 				<Table.Body>
 					{filteredFiles.map((file) => (
 						<Table.Row key={file.id}>
-							<Table.RowHeaderCell>{file.name}</Table.RowHeaderCell>
+							<Table.Cell>{file.name}</Table.Cell>
 							<Table.Cell>{file.type}</Table.Cell>
 							<Table.Cell>{file.size}</Table.Cell>
 							<Table.Cell>{file.dateUploaded}</Table.Cell>
 							<Table.Cell>
 								<button
-									className="bg-gray-500 p-3"
+									className="border-[#48295D]  border rounded-full p-3"
 									onClick={() => handleDownload(file)}
 								>
-									<PinBottomIcon />
+									<FileArrowDown size={24} weight="fill" />
+								</button>
+							</Table.Cell>
+							<Table.Cell>
+								<button
+									className=" border-[#54178d]  border rounded-full p-3"
+									onClick={() => handleDelete(file)}
+								>
+									<FileX size={24} weight="fill" />
 								</button>
 							</Table.Cell>
 						</Table.Row>
