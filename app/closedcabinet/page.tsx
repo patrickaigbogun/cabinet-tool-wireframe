@@ -210,7 +210,7 @@ export default function ClosedCabinet() {
 					type='search'
 					value={searchTerm}
 					onChange={handleSearch}
-					className=" focus:border-black focus:ring-black rounded-full p-2"
+					className=" focus:border-black focus:ring-black rounded-full p-2 focus:outline-none"
 				/>
 				<FileMagnifyingGlass size={28} weight='bold' className="mr-6" />
 			</div>
