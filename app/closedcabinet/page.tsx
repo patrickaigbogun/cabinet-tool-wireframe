@@ -205,18 +205,18 @@ export default function ClosedCabinet() {
 				<DragAndDropTarget onDropFiles={handleDropFiles} />
 			</div>
 			<div className='w-full flex flex-row justify-center md:justify-start' >
-			<div className='flex flex-row gap-x-2 items-center border-[3px] border-[#48295D] w-full md:w-[30%] p-2 rounded-full' >
-				<input
-					placeholder="Search files..."
-					type='search'
-					value={searchTerm}
-					onChange={handleSearch}
-					className=" focus:border-black focus:ring-black rounded-full p-2 focus:outline-none w-full"
-				/>
-				<span className='flex flex-row justify-end' >
-				<FileMagnifyingGlass size={28} weight='bold' />
-				</span>
-			</div>
+				<div className='flex flex-row gap-x-2 items-center border-[3px] border-[#48295D] w-full md:w-[30%] p-2 rounded-full' >
+					<input
+						placeholder="Search files..."
+						type='search'
+						value={searchTerm}
+						onChange={handleSearch}
+						className=" focus:border-black focus:ring-black rounded-full p-2 focus:outline-none w-full"
+					/>
+					<span className='flex flex-row justify-end' >
+						<FileMagnifyingGlass size={28} weight='bold' />
+					</span>
+				</div>
 			</div>
 
 			<Table.Root className='border rounded-xl p-2 overflow-x-scroll' >
@@ -231,10 +231,10 @@ export default function ClosedCabinet() {
 						<Table.ColumnHeaderCell>
 							<button onClick={() => handleSort('type')} className='border-[1.5px] p-2 rounded-lg flex-row flex  items-center justify-between gap-x-4'>
 								<span  >
-								File Type
+									File Type
 								</span>
 								<span>
-								{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
+									{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
 								</span>
 							</button>
 						</Table.ColumnHeaderCell>
