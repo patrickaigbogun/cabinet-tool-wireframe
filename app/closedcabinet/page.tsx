@@ -1,6 +1,6 @@
 'use client';
 
-import {  useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Box, Table } from '@radix-ui/themes';
 import DragAndDropTarget from '@/components/draganddroptarget';
 import { FileArrowDown, FileMagnifyingGlass, FileX, SortAscending, SortDescending } from '@phosphor-icons/react/dist/ssr';
@@ -65,7 +65,7 @@ export default function ClosedCabinet() {
 		// Provide default values in case estimate.usage or estimate.quota are undefined
 		const usage = estimate.usage ?? 0;
 		const quota = estimate.quota ?? 0
-	
+
 		const usedStorageMB = usage ? Math.floor(usage / 1024 / 1024) : 0;
 		const availableStorageMB = quota ? Math.floor((quota - usage) / 1024 / 1024) : 0;
 
@@ -204,30 +204,38 @@ export default function ClosedCabinet() {
 			<div className="container mx-auto">
 				<DragAndDropTarget onDropFiles={handleDropFiles} />
 			</div>
-			<div className='flex flex-row items-center border-[3px] border-[#48295D] p-0 w-fit rounded-full' >
+			<div className='w-full flex flex-row justify-center md:justify-start' >
+			<div className='flex flex-row gap-x-2 items-center border-[3px] border-[#48295D] w-full md:w-[30%] p-2 rounded-full' >
 				<input
 					placeholder="Search files..."
 					type='search'
 					value={searchTerm}
 					onChange={handleSearch}
-					className=" focus:border-black focus:ring-black rounded-full p-2 focus:outline-none"
+					className=" focus:border-black focus:ring-black rounded-full p-2 focus:outline-none w-full"
 				/>
-				<FileMagnifyingGlass size={28} weight='bold' className="mr-6" />
+				<span className='flex flex-row justify-end' >
+				<FileMagnifyingGlass size={28} weight='bold' />
+				</span>
+			</div>
 			</div>
 
-			<Table.Root className='border rounded-xl p-2' >
+			<Table.Root className='border rounded-xl p-2 overflow-x-scroll' >
 				<Table.Header>
 					<Table.Row className='items-center'>
 						<Table.ColumnHeaderCell className='' >
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
+							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center justify-between'>
 								File Name
 								{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>
-							<button onClick={() => handleSort('type')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
+							<button onClick={() => handleSort('type')} className='border-[1.5px] p-2 rounded-lg flex-row flex  items-center justify-between gap-x-4'>
+								<span  >
 								File Type
+								</span>
+								<span>
 								{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
+								</span>
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>
@@ -252,13 +260,13 @@ export default function ClosedCabinet() {
 				<Table.Body>
 					{filteredFiles.map((file) => (
 						<Table.Row key={file.id}>
-							<Table.Cell>{file.name}</Table.Cell>
+							<Table.Cell >{file.name}</Table.Cell>
 							<Table.Cell>{file.type}</Table.Cell>
 							<Table.Cell>{file.size}</Table.Cell>
 							<Table.Cell>{file.dateUploaded}</Table.Cell>
-							<Table.Cell className='space-x-2'>
-								<button className='border-[1.5px] border-[#54178d] rounded-full p-2' onClick={() => handleDownload(file)}><FileArrowDown size={28} /></button>
-								<button className='border-[1.5px] border-[#48295d] rounded-full p-2' onClick={() => handleDelete(file)}><FileX size={28} /></button>
+							<Table.Cell className=' flex flex-row items-center gap-x-3'>
+								<button className='border-[1.5px] border-[#54178d] rounded-full p-1' onClick={() => handleDownload(file)}><FileArrowDown size={28} /></button>
+								<button className='border-[1.5px] border-[#48295d] rounded-full p-1' onClick={() => handleDelete(file)}><FileX size={28} /></button>
 							</Table.Cell>
 						</Table.Row>
 					))}

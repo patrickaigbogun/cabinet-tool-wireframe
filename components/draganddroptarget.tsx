@@ -65,7 +65,7 @@ const DragAndDropTarget: React.FC<DragAndDropTargetProps> = ({ className, onDrop
 		<div
 			id="drop-target"
 			className={clsx(
-				'flex items-center justify-center border-2 border-dashed rounded-lg p-4 font-bold',
+				'flex items-center justify-center border-2 border-dashed rounded-lg p-4 font-bold text-center h-72',
 				isDragging ? 'border-purple-400 bg-purple-950/10 animate-pulse duration-75' : 'border-gray-400',
 				className
 			)}
@@ -74,7 +74,7 @@ const DragAndDropTarget: React.FC<DragAndDropTargetProps> = ({ className, onDrop
 			onDrop={handleDrop}
 			onClick={handleClick}
 		>
-			<p className=" p-28 text-base">
+			<p className="text-base">
 				Drag and drop files here or click to upload
 			</p>
 
