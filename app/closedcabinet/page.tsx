@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Box, Table } from '@radix-ui/themes';
 import DragAndDropTarget from '@/components/draganddroptarget';
-import { FileArrowDown, FileMagnifyingGlass, FileX, SortAscending, SortDescending } from '@phosphor-icons/react/dist/ssr';
+import { FileArrowDown, FileMagnifyingGlass, FileX, SortAscending, SortDescending, Clipboard } from '@phosphor-icons/react/dist/ssr';
 
 interface FileData {
 	id: number;
@@ -125,6 +125,24 @@ export default function ClosedCabinet() {
 		};
 	};
 
+	const [tooltipId, setTooltipId] = useState<number | null>(null); // State to track the tooltip
+
+	async function handleCopyLink(file: FileData, index: number) {
+		const link = generateDownloadLink(file);
+		try {
+			await navigator.clipboard.writeText(link.anchor);
+			// Show the tooltip for the clicked button
+			setTooltipId(index);
+			// Hide the tooltip after 2 seconds
+			setTimeout(() => {
+				setTooltipId(null);
+			}, 2000);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+
 	const handleDownload = (file: FileData) => {
 		const link = generateDownloadLink(file);
 		const a = document.createElement('a');
@@ -222,44 +240,70 @@ export default function ClosedCabinet() {
 			<Table.Root className='border rounded-xl p-2 overflow-x-scroll' >
 				<Table.Header>
 					<Table.Row className='items-center'>
-						<Table.ColumnHeaderCell className='' >
-							<button onClick={() => handleSort('name')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center justify-between'>
-								File Name
+						<Table.ColumnHeaderCell>
+							<button className='items-center flex flex-row p-2' >
+								<span  >
+									S/N
+								</span>
+							</button>
+						</Table.ColumnHeaderCell>
+						<Table.ColumnHeaderCell>
+							<button
+								onClick={() => handleSort('name')}
+								className='border-[1.5px] p-2 rounded-lg flex flex-row items-center justify-between w-fit mx-auto whitespace-nowrap'
+							>
+								<span>
+									File Name
+								</span>
 								{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>
-							<button onClick={() => handleSort('type')} className='border-[1.5px] p-2 rounded-lg flex-row flex  items-center justify-between gap-x-4'>
-								<span  >
-									File Type
-								</span>
+							<button
+								onClick={() => handleSort('type')}
+								className='border-[1.5px] p-2 rounded-lg flex flex-row items-center justify-between w-fit mx-auto whitespace-nowrap'
+							>
+								<span>File Type</span>
 								<span>
 									{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
 								</span>
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>
-							<button onClick={() => handleSort('size')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
-								File Size
+							<button
+								onClick={() => handleSort('size')}
+								className='border-[1.5px] p-2 rounded-lg flex flex-row items-center justify-between w-fit mx-auto whitespace-nowrap'
+							>
+								<span>
+									File Size
+								</span>
 								{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
 							</button>
 						</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>
-							<button onClick={() => handleSort('dateUploaded')} className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
-								Date Uploaded
+							<button
+								onClick={() => handleSort('dateUploaded')}
+								className='border-[1.5px] p-2 rounded-lg flex flex-row items-center justify-between w-fit mx-auto whitespace-nowrap'
+							>
+								<span>Date Uploaded</span>
 								{sortAscending ? <SortDescending size={24} weight="bold" /> : <SortAscending size={24} weight="bold" />}
 							</button>
 						</Table.ColumnHeaderCell>
-						<Table.ColumnHeaderCell >
-							<button className='border-[1.5px] p-2 rounded-lg flex flex-row items-center'>
-								Actions
+						<Table.ColumnHeaderCell>
+							<button
+								className='border-[1.5px] p-2 rounded-lg flex flex-row items-center justify-between w-fit mx-auto whitespace-nowrap'
+							>
+								<span>
+									Actions
+								</span>
 							</button>
 						</Table.ColumnHeaderCell>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
-					{filteredFiles.map((file) => (
+					{filteredFiles.map((file, index) => (
 						<Table.Row key={file.id}>
+							<Table.Cell >{index + 1}</Table.Cell>
 							<Table.Cell >{file.name}</Table.Cell>
 							<Table.Cell>{file.type}</Table.Cell>
 							<Table.Cell>{file.size}</Table.Cell>
@@ -267,6 +311,10 @@ export default function ClosedCabinet() {
 							<Table.Cell className=' flex flex-row items-center gap-x-3'>
 								<button className='border-[1.5px] border-[#54178d] rounded-full p-1' onClick={() => handleDownload(file)}><FileArrowDown size={28} /></button>
 								<button className='border-[1.5px] border-[#48295d] rounded-full p-1' onClick={() => handleDelete(file)}><FileX size={28} /></button>
+								<button className='border-[1.5px] border-[#48295d] rounded-full p-1' onClick={() => handleCopyLink(file, index)}><Clipboard size={28} /></button>
+								{tooltipId === index && ( // Show tooltip only for the clicked button
+									<div className="tooltip">Link copied!</div>
+								)}
 							</Table.Cell>
 						</Table.Row>
 					))}
