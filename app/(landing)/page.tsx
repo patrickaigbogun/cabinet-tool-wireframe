@@ -1,5 +1,7 @@
 // import { Microphone, OpenAiLogo, Plus } from "@phosphor-icons/react/dist/ssr";
 
+import { CloudArrowUp, Export, FolderLock, Globe } from "@phosphor-icons/react/dist/ssr";
+
 
 function LandingPage() {
 	return (
@@ -28,12 +30,25 @@ function LandingPage() {
 					in just a few clicks. Your file management has never been this
 					seamless.
 				</p>
-				<ul className="flex flex-col sm:flex-row gap-4 text-start bg-gray-900/50 p-5 rounded-xl justify-between overflow-x-scroll">
-					<li className=" flex flex-row gap-4 sm:flex-col items-center " ><img src="" alt="" width={32} height={32}/><p>Unlimited file uploads</p></li>
-					<li className=" flex flex-row gap-4 sm:flex-col items-center " ><img src="" alt="" width={32} height={32}/><p>Secure file storage on your dashboard</p></li>
-					<li className=" flex flex-row gap-4 sm:flex-col items-center " ><img src="" alt="" width={32} height={32}/><p>Easy file sharing via downloadable links</p></li>
-					<li className=" flex flex-row gap-4 sm:flex-col items-center " ><img src="" alt="" width={32} height={32}/><p>Access from anywhere, anytime</p></li>
+				<ul className="flex h-fit flex-row items-center p-6 gap-x-8 text-start bg-gray-900/50 rounded-xl justify-between overflow-x-scroll scrollbar-thin scrollbar-thumb-black/40 scrollbar-corner-black/40 scrollbar-thumb-rounded-full scrollbar-track-slate-700/20 snap-x snap-mandatory scroll-smooth">
+					<li className="flex flex-row sm:flex-col items-center gap-4 h-[150px] sm:h-[300px] snap-center">
+						<CloudArrowUp size={96} weight="fill" />
+						<p>Unlimited file uploads</p>
+					</li>
+					<li className="flex flex-row sm:flex-col items-center gap-4 h-[150px] sm:h-[300px] snap-center">
+						<FolderLock size={96} weight="fill" />
+						<p>Secure file storage on your dashboard</p>
+					</li>
+					<li className="flex flex-row sm:flex-col items-center gap-4 h-[150px] sm:h-[300px] snap-center">
+						<Export size={96} weight="fill" />
+						<p>Easy file sharing via downloadable links</p>
+					</li>
+					<li className="flex flex-row sm:flex-col items-center gap-4 h-[150px] sm:h-[300px] snap-center">
+						<Globe size={96} weight="fill" />
+						<p>Access from anywhere, anytime</p>
+					</li>
 				</ul>
+
 			</section>
 
 			{/* Onboarding Section */}
@@ -84,7 +99,7 @@ function LandingPage() {
 			</section>
 			</div> */}
 		</section>
-		
+
 	);
 }
 
